@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVerse — Stream & Discover Movies</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1c2742;
+      --accent: #e50914;
+      --accent-hover: #ff2a36;
+      --accent-glow: rgba(229, 9, 20, 0.4);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --rating-color: #f59e0b;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* ---------------- HEADER / NAVBAR ---------------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(10, 14, 23, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo i {
+      color: var(--accent);
+      font-size: 1.6rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px 8px 36px;
+      border-radius: 9999px;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+      width: 220px;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      width: 280px;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 12px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .avatar-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e50914, #ff7b00);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* ---------------- HERO SECTION ---------------- */
+    .hero {
+      position: relative;
+      height: 80vh;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      margin-top: 72px;
+      background: linear-gradient(to right, rgba(10, 14, 23, 0.95) 20%, rgba(10, 14, 23, 0.4) 60%, rgba(10, 14, 23, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 620px;
+      z-index: 2;
+    }
+
+    .badge-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(229, 9, 20, 0.2);
+      color: #ff4d58;
+      border: 1px solid rgba(229, 9, 20, 0.35);
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .hero-meta .rating {
+      color: var(--rating-color);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .hero-desc {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    /* ---------------- FILTER TABS ---------------- */
+    .catalog-section {
+      padding: 60px 5% 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .genre-filter {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .filter-pill {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .filter-pill:hover,
+    .filter-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ---------------- MOVIE GRID ---------------- */
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .movie-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .poster-wrap {
+      position: relative;
+      width: 100%;
+      height: 310px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .poster-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .movie-card:hover .poster-wrap img {
+      transform: scale(1.06);
+    }
+
+    .badge-rating {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(10, 14, 23, 0.85);
+      backdrop-filter: blur(6px);
+      color: var(--rating-color);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .movie-card:hover .play-overlay {
+      opacity: 1;
+    }
+
+    .play-btn-circle {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      transform: scale(0.8);
+      transition: var(--transition);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .movie-card:hover .play-btn-circle {
+      transform: scale(1);
+    }
+
+    .movie-info {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .movie-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+    }
+
+    .movie-sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .movie-genre {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ---------------- MODAL / TRAILER POPUP ---------------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      width: 100%;
+      max-width: 600px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+      position: relative;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-banner {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      background: var(--accent);
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .modal-tags {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .modal-desc {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 5%;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      background: rgba(10, 14, 23, 0.6);
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .footer-socials a {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .footer-socials a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------------- RESPONSIVENESS ---------------- */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .search-box input {
+        width: 150px;
+      }
+      .search-box input:focus {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <a href="#" class="logo">
+      <i class="fa-solid fa-play"></i> CineVerse
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Movies</a></li>
+      <li><a href="#">TV Shows</a></li>
+      <li><a href="#">Trending</a></li>
+      <li><a href="#">My List</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search titles, actors..." />
+      </div>
+      <div class="avatar-btn" title="Profile">K</div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge-hero"><i class="fa-solid fa-bolt"></i> Spotlight of the Week</span>
+      <h1 class="hero-title">Interstellar Voyage</h1>
+      <div class="hero-meta">
+        <span class="rating"><i class="fa-solid fa-star"></i> 8.9</span>
+        <span>2024</span>
+        <span>2h 35m</span>
+        <span>Sci-Fi / Adventure</span>
+      </div>
+      <p class="hero-desc">
+        A brave crew embarks on the longest mission in human history to find a habitable planet across the farthest edge of the cosmic rift.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="openHeroModal()">
+          <i class="fa-solid fa-play"></i> Watch Trailer
+        </button>
+        <button class="btn btn-secondary">
+          <i class="fa-solid fa-plus"></i> Add to List
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG & FILTER SECTION -->
+  <main class="catalog-section">
+    <div class="section-header">
+      <h2 class="section-title">Explore Movies</h2>
+      <div class="genre-filter">
+        <button class="filter-pill active" data-genre="all">All</button>
+        <button class="filter-pill" data-genre="Sci-Fi">Sci-Fi</button>
+        <button class="filter-pill" data-genre="Action">Action</button>
+        <button class="filter-pill" data-genre="Drama">Drama</button>
+        <button class="filter-pill" data-genre="Thriller">Thriller</button>
+        <button class="filter-pill" data-genre="Animation">Animation</button>
+      </div>
+    </div>
+
+    <!-- Movie Cards Grid -->
+    <div class="movies-grid" id="moviesGrid">
+      <!-- Populated via JavaScript -->
+    </div>
+  </main>
+
+  <!-- MOVIE DETAILS MODAL -->
+  <div class="modal-backdrop" id="movieModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="modalImg" class="modal-banner" src="" alt="Movie banner" />
+      <div class="modal-body">
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <div class="modal-tags">
+          <span style="color: var(--rating-color);" id="modalRating"></span>
+          <span id="modalYear"></span>
+          <span id="modalGenre"></span>
+        </div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <button class="btn btn-primary" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-play"></i> Stream Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-socials">
+      <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#"><i class="fa-brands fa-github"></i></a>
+    </div>
+    <p>&copy; 2026 CineVerse. Built for movie lovers everywhere.</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const movies = [
+      {
+        id: 1,
+        title: "Cyber City 2099",
+        genre: "Sci-Fi",
+        year: 2024,
+        rating: 8.7,
+        image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
+        desc: "In a neon-drenched metropolis ruled by AI overlords, a rogue detective uncovers a conspiracy that threatens human consciousness."
+      },
+      {
+        id: 2,
+        title: "Shadows of Tokyo",
+        genre: "Thriller",
+        year: 2023,
+        rating: 8.2,
+        image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop",
+        desc: "An undercover investigator races through the underbelly of Shinjuku to stop an international syndicate before dawn."
+      },
+      {
+        id: 3,
+        title: "The Last Horizon",
+        genre: "Action",
+        year: 2025,
+        rating: 9.1,
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+        desc: "A group of elite pilots face impossible odds defending orbital waystations from an unexpected celestial breach."
+      },
+      {
+        id: 4,
+        title: "Whispers in the Mist",
+        genre: "Drama",
+        year: 2022,
+        rating: 7.9,
+        image: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop",
+        desc: "A touching drama exploring a forgotten mountain community and a pianist rediscovering harmony amid life's quiet seasons."
+      },
+      {
+        id: 5,
+        title: "Kingdom of Spirits",
+        genre: "Animation",
+        year: 2024,
+        rating: 8.8,
+        image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop",
+        desc: "A young apprentice accidentally unleashes an ancient guardian spirit, embarking on an enchanting journey across mythical lands."
+      },
+      {
+        id: 6,
+        title: "Solaris Protocol",
+        genre: "Sci-Fi",
+        year: 2025,
+        rating: 8.4,
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
+        desc: "Scientists orbiting a mysterious dying star discover that its anomalies are transmitting messages backward in time."
+      },
+      {
+        id: 7,
+        title: "Midnight Heist",
+        genre: "Action",
+        year: 2023,
+        rating: 7.6,
+        image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=600&auto=format&fit=crop",
+        desc: "Master thieves plan an intricate vault infiltration inside the world's most secure subterranean casino."
+      },
+      {
+        id: 8,
+        title: "Crimson Fall",
+        genre: "Thriller",
+        year: 2024,
+        rating: 8.0,
+        image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=600&auto=format&fit=crop",
+        desc: "Trapped atop an isolated surveillance outpost, a lone engineer must survive psychological dread and frozen perils."
+      }
+    ];
+
+    const moviesGrid = document.getElementById('moviesGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const modal = document.getElementById('movieModal');
+
+    let currentGenre = 'all';
+
+    function renderMovies(items) {
+      moviesGrid.innerHTML = '';
+      if (items.length === 0) {
+        moviesGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No movies found matching your search.</p>`;
+        return;
+      }
+
+      items.forEach(movie => {
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.innerHTML = `
+          <div class="poster-wrap">
+            <img src="${movie.image}" alt="${movie.title}" loading="lazy" />
+            <div class="badge-rating"><i class="fa-solid fa-star"></i> ${movie.rating}</div>
+            <div class="play-overlay">
+              <div class="play-btn-circle"><i class="fa-solid fa-play"></i></div>
+            </div>
+          </div>
+          <div class="movie-info">
+            <div class="movie-title">${movie.title}</div>
+            <div class="movie-sub">
+              <span>${movie.year}</span>
+              <span class="movie-genre">${movie.genre}</span>
+            </div>
+          </div>
+        `;
+        card.addEventListener('click', () => openModal(movie));
+        moviesGrid.appendChild(card);
+      });
+    }
+
+    function filterMovies() {
+      const query = searchInput.value.toLowerCase().trim();
+      const filtered = movies.filter(movie => {
+        const matchesGenre = currentGenre === 'all' || movie.genre.toLowerCase() === currentGenre.toLowerCase();
+        const matchesSearch = movie.title.toLowerCase().includes(query) || movie.desc.toLowerCase().includes(query);
+        return matchesGenre && matchesSearch;
+      });
+      renderMovies(filtered);
+    }
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentGenre = pill.dataset.genre;
+        filterMovies();
+      });
+    });
+
+    searchInput.addEventListener('input', filterMovies);
+
+    function openModal(movie) {
+      document.getElementById('modalImg').src = movie.image;
+      document.getElementById('modalTitle').textContent = movie.title;
+      document.getElementById('modalRating').innerHTML = `<i class="fa-solid fa-star"></i> ${movie.rating}`;
+      document.getElementById('modalYear').textContent = movie.year;
+      document.getElementById('modalGenre').textContent = movie.genre;
+      document.getElementById('modalDesc').textContent = movie.desc;
+      modal.classList.add('active');
+    }
+
+    function openHeroModal() {
+      openModal({
+        title: "Interstellar Voyage",
+        genre: "Sci-Fi / Adventure",
+        year: 2024,
+        rating: 8.9,
+        image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1200&auto=format&fit=crop",
+        desc: "A brave crew embarks on the longest mission in human history to find a habitable planet across the farthest edge of the cosmic rift."
+      });
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    renderMovies(movies);
+  </script>
+</body>
+</html>
