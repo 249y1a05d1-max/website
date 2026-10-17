@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — CineVerse</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1c2742;
+      --accent: #e50914;
+      --accent-hover: #ff2a36;
+      --accent-glow: rgba(229, 9, 20, 0.4);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --rating-color: #f59e0b;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ---------------- HEADER / NAVBAR ---------------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(10, 14, 23, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo i {
+      color: var(--accent);
+      font-size: 1.6rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ---------------- HERO / BANNER ---------------- */
+    .about-hero {
+      position: relative;
+      padding: 160px 5% 90px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(229, 9, 20, 0.15) 0%, rgba(10, 14, 23, 0) 70%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(229, 9, 20, 0.15);
+      border: 1px solid rgba(229, 9, 20, 0.35);
+      color: #ff4d58;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    .about-title {
+      font-size: 3.4rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .about-title span {
+      background: linear-gradient(135deg, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-subtitle {
+      max-width: 700px;
+      margin: 0 auto 36px;
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+
+    /* ---------------- STATS COUNTER ---------------- */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-top: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 28px 20px;
+      border-radius: 14px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: rgba(229, 9, 20, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    /* ---------------- STORY SECTION ---------------- */
+    .section {
+      padding: 90px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .story-img-wrap {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .story-img-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .section-tag {
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-heading {
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-text {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    /* ---------------- VALUES / PILLARS ---------------- */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .pillar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 32px 26px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    .pillar-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      background: rgba(229, 9, 20, 0.12);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .pillar-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .pillar-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ---------------- TEAM SECTION ---------------- */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .team-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(229, 9, 20, 0.3);
+    }
+
+    .team-photo {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .team-info {
+      padding: 20px 16px;
+    }
+
+    .team-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .team-socials {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .team-socials a {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .team-socials a:hover {
+      color: #fff;
+    }
+
+    /* ---------------- CTA BANNER ---------------- */
+    .cta-box {
+      background: linear-gradient(135deg, #161f36, #111728);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 300px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box h3 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 28px;
+      font-size: 1.05rem;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 5%;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      background: rgba(10, 14, 23, 0.6);
+      margin-top: 60px;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .footer-socials a {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .footer-socials a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------------- RESPONSIVENESS ---------------- */
+    @media (max-width: 868px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about-title {
+        font-size: 2.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <a href="index.html" class="logo">
+      <i class="fa-solid fa-play"></i> CineVerse
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#movies">Movies</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="index.html#trending">Trending</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="index.html" class="btn btn-primary">
+        <i class="fa-solid fa-compass"></i> Explore Movies
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="about-hero">
+    <div class="about-badge">
+      <i class="fa-solid fa-film"></i> Our Mission & Vision
+    </div>
+    <h1 class="about-title">
+      The Next Era of <span>Cinematic Storytelling</span>
+    </h1>
+    <p class="about-subtitle">
+      CineVerse was founded on a simple premise: great stories deserve an unforgettable canvas. We connect audiences worldwide with world-class indie masterworks, thrilling blockbusters, and award-winning cinema.
+    </p>
+
+    <!-- STATS -->
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-num">15,000+</div>
+        <div class="stat-label">Curated Titles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4K HDR</div>
+        <div class="stat-label">Ultra HD Fidelity</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Countries Supported</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">99.9%</div>
+        <div class="stat-label">Streaming Uptime</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY SECTION -->
+  <section class="section">
+    <div class="story-grid">
+      <div class="story-content">
+        <span class="section-tag">Behind The Screen</span>
+        <h2 class="section-heading">Built by Filmmakers and Tech Visionaries</h2>
+        <p class="section-text">
+          In 2023, a collective of filmmakers, sound engineers, and streaming architects united to tackle the modern dilemma: endless scrolling, disjointed algorithms, and compressed audio-visual quality.
+        </p>
+        <p class="section-text">
+          We built CineVerse with pristine streaming bitrates, frame-accurate HDR color grading, and human-curated discovery collections that celebrate cinema as an artform.
+        </p>
+      </div>
+      <div class="story-img-wrap">
+        <img 
+          src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1000&auto=format&fit=crop" 
+          alt="Cinema auditorium with red seats" 
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS / VALUES -->
+  <section class="section" style="padding-top: 0;">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+      <span class="section-tag">What Sets Us Apart</span>
+      <h2 class="section-heading">Why Audiences Choose CineVerse</h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <h3 class="pillar-title">Smart Discovery</h3>
+        <p class="pillar-desc">
+          AI recommendations paired with editorial collections curated by film critics to ensure you never run out of inspiration.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <i class="fa-solid fa-volume-high"></i>
+        </div>
+        <h3 class="pillar-title">Dolby Atmos Audio</h3>
+        <p class="pillar-desc">
+          Spatial soundscapes that place you right in the center of the action, whether on headphones or home theater systems.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <i class="fa-solid fa-cloud-arrow-down"></i>
+        </div>
+        <h3 class="pillar-title">Offline Cinema</h3>
+        <p class="pillar-desc">
+          Seamlessly download your favorite movies and shows across iOS, Android, and desktop devices for travel without buffering.
+        </p>
+      </div>
+
+      <div class="pillar-card">
+        <div class="pillar-icon">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <h3 class="pillar-title">Watch Parties</h3>
+        <p class="pillar-desc">
+          Host synchronized virtual screening rooms with friends and family worldwide featuring live chat and real-time audio reactions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP TEAM -->
+  <section class="section" style="padding-top: 0;">
+    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+      <span class="section-tag">The Innovators</span>
+      <h2 class="section-heading">Meet Our Leadership</h2>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <img 
+          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500&auto=format&fit=crop" 
+          alt="Elena Vance" 
+          class="team-photo" 
+        />
+        <div class="team-info">
+          <h4 class="team-name">Elena Vance</h4>
+          <p class="team-role">Chief Executive Officer</p>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img 
+          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=500&auto=format&fit=crop" 
+          alt="Marcus Sterling" 
+          class="team-photo" 
+        />
+        <div class="team-info">
+          <h4 class="team-name">Marcus Sterling</h4>
+          <p class="team-role">Head of Streaming Technology</p>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img 
+          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500&auto=format&fit=crop" 
+          alt="Sophia Reyes" 
+          class="team-photo" 
+        />
+        <div class="team-info">
+          <h4 class="team-name">Sophia Reyes</h4>
+          <p class="team-role">Lead Editorial & Curation</p>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img 
+          src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=500&auto=format&fit=crop" 
+          alt="David Chen" 
+          class="team-photo" 
+        />
+        <div class="team-info">
+          <h4 class="team-name">David Chen</h4>
+          <p class="team-role">Principal Product Designer</p>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-dribbble"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA CALLOUT -->
+    <div class="cta-box">
+      <h3>Ready to dive into the universe?</h3>
+      <p>Explore thousands of trending releases, cult classics, and upcoming festival premieres today.</p>
+      <a href="index.html" class="btn btn-primary" style="padding: 14px 32px; font-size: 1rem;">
+        <i class="fa-solid fa-play"></i> Start Browsing
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-socials">
+      <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#"><i class="fa-brands fa-github"></i></a>
+    </div>
+    <p>&copy; 2026 CineVerse. Built for movie lovers everywhere.</p>
+  </footer>
+
+</body>
+</html>
